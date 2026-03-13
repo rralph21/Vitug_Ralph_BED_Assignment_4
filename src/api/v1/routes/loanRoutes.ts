@@ -1,23 +1,25 @@
 import express, { Express } from "express";
+import { Router } from 'express';
+
+const router: Router = Router();
+
 
 const app: Express = express();
 
-app.get("/api/v1/loan", (req, res) => {
+app.get("/", (req, res) => {
     res.send("Get all items");
 });
 
-app.post("/api/v1/loan", (req, res) => {
+app.post("/", (req, res) => {
     res.send("Create a new item");
 });
 
-app.put("/api/v1/loan/:id", (req, res) => {
+app.put("/", (req, res) => {
     res.send("Update an item");
 });
 
-app.delete("/api/v1/loan/:id", (req, res) => {
+app.delete("/", (req, res) => {
     res.send("Delete an item");
 });
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
-});
+export default router;

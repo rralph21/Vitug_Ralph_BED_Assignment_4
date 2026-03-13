@@ -1,9 +1,14 @@
 import express, { Express } from "express";
+import  loanRoutes from "./api/v1/routes/loanRoutes";
+
 
 // Initialize Express application
 const app: Express = express();
 
 app.use(express.json());
+
+
+app.use("/api/v1/loan", loanRoutes);
 
 
 // Define a route
