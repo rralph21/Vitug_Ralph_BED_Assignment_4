@@ -7,9 +7,9 @@ app.use(express.json());
 
 
 // Define a route
-app.get("/", (req, res) => {
-    res.send("Hello, World!");
-});
+// app.get("/", (req, res) => {
+//     res.send("Hello, World!");
+// });
 
 app.get("/api/v1/health", (req, res) => {
     res.json({
