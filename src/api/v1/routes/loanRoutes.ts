@@ -6,19 +6,19 @@ const router: Router = Router();
 
 const app: Express = express();
 
-app.get("/", (req, res) => {
+router.get("/loan", (req, res) => {
     res.send("Get all items");
 });
 
-app.post("/", (req, res) => {
+router.post("/loan:id", (req, res) => {
     res.send("Create a new item");
 });
 
-app.put("/", (req, res) => {
+router.put("/loan:id", (req, res) => {
     res.send("Update an item");
 });
 
-app.delete("/", (req, res) => {
+router.delete("/loan:id", (req, res) => {
     res.send("Delete an item");
 });
 

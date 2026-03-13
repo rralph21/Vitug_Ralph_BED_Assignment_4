@@ -8,7 +8,7 @@ const app: Express = express();
 app.use(express.json());
 
 
-app.use("/api/v1/loan", loanRoutes);
+app.use("/api/v1", loanRoutes);
 
 
 // Define a route
