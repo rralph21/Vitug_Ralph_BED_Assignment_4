@@ -1,5 +1,13 @@
 import { Request, Response } from "express";
 
+import { 
+    getAllLoansAsync, 
+    createLoanAsync, 
+    updateLoanAsync, 
+    deleteLoanAsync 
+ } from "../services/loanServices"; 
+ 
+
 export const getAllLoans = (req: Request, res: Response) => {
     // Logic to get all items
     res.status(200).send("Get all items");
