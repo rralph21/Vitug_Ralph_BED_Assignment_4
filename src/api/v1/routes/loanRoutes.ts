@@ -1,14 +1,9 @@
-import express, { Express } from "express";
 import { Router } from 'express';
+import { getAllLoans } from "../controllers/loanControllers";
 
 const router: Router = Router();
 
-
-const app: Express = express();
-
-router.get("/loan", (req, res) => {
-    res.send("Get all items");
-});
+router.get("/loans", getAllLoans)
 
 router.post("/loan:id", (req, res) => {
     res.send("Create a new item");

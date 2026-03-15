@@ -1,17 +1,19 @@
 import { Request, Response } from "express";
+import { HTTP_STATUS } from "../../../constants/httpConstants";
+import {getAllLoansService} from "../services/loanServices";
 
-import { 
-    getAllLoansAsync, 
-    createLoanAsync, 
-    updateLoanAsync, 
-    deleteLoanAsync 
- } from "../services/loanServices"; 
- 
 
-export const getAllLoans = (req: Request, res: Response) => {
-    // Logic to get all items
-    res.status(200).send("Get all items");
+export const getAllLoans = (req: Request, res: Response): void => {
+    const loans = getAllLoansService();
+
+    res.status(200).json({
+        success: true,
+        message: "Loans retrieved successfully",
+        count: loans.length,
+        data: loans,
+    });
 };
+
 
 export const createLoan = (req: Request, res: Response) => {
     // Logic to create a new item
