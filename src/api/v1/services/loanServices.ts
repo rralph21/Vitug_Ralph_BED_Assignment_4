@@ -1,18 +1,10 @@
-import { Request, Response } from "express";
-import { HTTP_STATUS } from "../../../constants/httpConstants";
 import { Loan } from "../models/loan";
 import { sampleLoans } from "../models/sampleLoans";
 
 
-export const getAllLoans = async (req: Request, res: Response): Promise<void> => {
-    // Logic to process all items from the database
-    const loans: Loan[] = sampleLoans; // Replace with actual database call
-
-    res.status(HTTP_STATUS.OK).json({
-        message: "Loans application retrieved",
-        count: loans.length,
-        data: loans
-    });
+export const getAllLoansService = (): Loan[] => {
+  return sampleLoans;
+  
 };
 
 export const createLoan = (loan: string): string => {
