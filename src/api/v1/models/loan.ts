@@ -1,8 +1,11 @@
+export type LoanStatus = "pending" | "under_review" | "flagged" | "approved" | "rejected";
+
 export interface Loan {
     id: number;
     applicant: string
     amount: number;
-    status: "pending" | "under_review" | "flagged";
-    createdAt: Date;
+    status: LoanStatus;
+    createdAt: string;
 }
+
 

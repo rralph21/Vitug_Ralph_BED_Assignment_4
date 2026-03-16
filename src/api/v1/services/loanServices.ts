@@ -1,15 +1,25 @@
 import { Loan } from "../models/loan";
+import { CreateLoanInput } from "../models/createLoan";
 import { sampleLoans } from "../models/sampleLoans";
 
 
 export const getAllLoansService = (): Loan[] => {
-  return sampleLoans;
-  
+    return sampleLoans;
+
 };
 
-export const createLoan = (loan: string): string => {
-    // Logic to add a new item to the database
-    return "Item added";
+export const createLoanService = (loanData: CreateLoanInput): Loan => {
+    const newLoan: Loan = {
+        id: sampleLoans.length + 1,
+        applicant: loanData.applicant,
+        amount: loanData.amount,
+        status: loanData.status,
+        createdAt: new Date().toISOString(),
+    };
+
+    sampleLoans.push(newLoan);
+
+    return newLoan;
 };
 
 export const updateLoan = (id: number, loan: string): string => {
