@@ -1,6 +1,7 @@
 import { Loan } from "../models/loan";
 import { CreateLoanInput } from "../models/createLoan";
 import { sampleLoans } from "../models/sampleLoans";
+import { UpdateLoanInput } from "../models/updateLoan";
 
 
 export const getAllLoansService = (): Loan[] => {
@@ -22,9 +23,22 @@ export const createLoanService = (loanData: CreateLoanInput): Loan => {
     return newLoan;
 };
 
-export const updateLoan = (id: number, loan: string): string => {
-    // Logic to update an item in the database
-    return "Item updated";
+export const updateLoanService = (
+    id: number,
+    updateData: UpdateLoanInput
+): Loan | null => {
+    const loanIndex = sampleLoans.findIndex((loan) => loan.id === id);
+
+    if (loanIndex === -1) {
+        return null;
+    }
+
+    sampleLoans[loanIndex] = {
+        ...sampleLoans[loanIndex],
+        ...updateData,
+    };
+
+    return sampleLoans[loanIndex];
 };
 
 export const deleteLoan = (id: number): string => {
