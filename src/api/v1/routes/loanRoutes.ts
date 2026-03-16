@@ -6,15 +6,18 @@ import {
     updateLoanSchema,
     loanIdSchema,
 } from "../ulits/loanValidation";
+import authenticate from '../middleware/authenticate';
+import isAuthorized from '../middleware/authorize';
+
 
 const router: Router = Router();
 
-router.get("/loans", getAllLoans)
+router.get("/loans", authenticate,isAuthorized({ hasRole: ["officer" , "manager" , "admin"] }), getAllLoans);
 
-router.post("/loans", validateRequest(createLoanSchema), createLoan);
+router.post("/loans", authenticate,isAuthorized({ hasRole: [ "manager"] }), validateRequest(createLoanSchema), createLoan);
 
-router.put("/loan/:id", validateRequest(updateLoanSchema), updateLoan);
+router.put("/loan/:id", authenticate,isAuthorized({ hasRole: ["officer" , "manager"] }), validateRequest(updateLoanSchema), updateLoan);
 
-router.delete("/loan/:id", validateRequest(loanIdSchema), deleteLoan);
+router.delete("/loan/:id", authenticate,isAuthorized({ hasRole: ["officer" , "manager" , "admin"] }), validateRequest(loanIdSchema), deleteLoan);
 
 export default router;

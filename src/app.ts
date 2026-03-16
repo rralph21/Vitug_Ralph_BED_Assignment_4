@@ -28,10 +28,6 @@ app.use(express.json());
 app.use("/api/v1", loanRoutes);
 app.use("/api/v1", adminRoutes);
 
-// Define a route
-// app.get("/", (req, res) => {
-//     res.send("Hello, World!");
-// });
 
 app.get("/api/v1/health", (req, res) => {
     res.json({
@@ -41,5 +37,9 @@ app.get("/api/v1/health", (req, res) => {
         version: "1.0.0",
     });
 });
+
+
+// Global error handling middleware (MUST be applied last)
+app.use(errorHandler);
 
 export default app;
