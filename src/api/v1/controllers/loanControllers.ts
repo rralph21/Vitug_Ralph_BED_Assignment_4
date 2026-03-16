@@ -1,20 +1,26 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 import { createLoanService, getAllLoansService, updateLoanService, deleteLoanService } from "../services/loanServices";
 
 
-export const getAllLoans = (req: Request, res: Response): void => {
-    const loans = getAllLoansService();
+export const getAllLoans = (req: Request, res: Response, next: NextFunction): void => {
+    try {
+        const loans = getAllLoansService();
 
-    res.status(200).json({
-        message: "Loans retrieved successfully",
-        count: loans.length,
-        data: loans,
-    });
+        res.status(HTTP_STATUS.OK).json({
+            success: true,
+            message: "Loans retrieved successfully",
+            count: loans.length,
+            data: loans,
+        });
+
+    } catch (error) {
+        next(error);
+    }
 };
 
 
-export const createLoan = (req: Request, res: Response): void => {
+export const createLoan = (req: Request, res: Response, next: NextFunction): void => {
     const { applicant, amount, status } = req.body;
 
     const newLoan = createLoanService({

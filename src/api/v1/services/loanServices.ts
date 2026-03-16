@@ -2,6 +2,8 @@ import { Loan } from "../models/loan";
 import { CreateLoanInput } from "../models/createLoan";
 import { sampleLoans } from "../models/sampleLoans";
 import { UpdateLoanInput } from "../models/updateLoan";
+import { HTTP_STATUS } from "../../../constants/httpConstants";
+import { ServiceError } from "../errors/error";
 
 
 export const getAllLoansService = (): Loan[] => {
@@ -30,7 +32,11 @@ export const updateLoanService = (
     const loanIndex = sampleLoans.findIndex((loan) => loan.id === id);
 
     if (loanIndex === -1) {
-        return null;
+        throw new ServiceError(
+            "Loan not found",
+            "LOAN_NOT_FOUND",
+            HTTP_STATUS.NOT_FOUND
+        );
     }
 
     sampleLoans[loanIndex] = {
@@ -45,7 +51,11 @@ export const deleteLoanService = (id: number): Loan | null => {
     const loanIndex = sampleLoans.findIndex((loan) => loan.id === id);
 
     if (loanIndex === -1) {
-        return null;
+        throw new ServiceError(
+            "Loan not found",
+            "LOAN_NOT_FOUND",
+            HTTP_STATUS.NOT_FOUND
+        );
     }
 
     const deletedLoan = sampleLoans[loanIndex];
