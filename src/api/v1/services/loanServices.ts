@@ -41,7 +41,15 @@ export const updateLoanService = (
     return sampleLoans[loanIndex];
 };
 
-export const deleteLoan = (id: number): string => {
-    // Logic to delete an item from the database
-    return "Item deleted";
+export const deleteLoanService = (id: number): Loan | null => {
+    const loanIndex = sampleLoans.findIndex((loan) => loan.id === id);
+
+    if (loanIndex === -1) {
+        return null;
+    }
+
+    const deletedLoan = sampleLoans[loanIndex];
+    sampleLoans.splice(loanIndex, 1);
+
+    return deletedLoan;
 };

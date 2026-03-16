@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createLoan, getAllLoans, updateLoan } from "../controllers/loanControllers";
+import { createLoan, deleteLoan, getAllLoans, updateLoan } from "../controllers/loanControllers";
 
 const router: Router = Router();
 
@@ -9,8 +9,6 @@ router.post("/loans", createLoan);
 
 router.put("/loan/:id", updateLoan);
 
-router.delete("/loan:id", (req, res) => {
-    res.send("Delete an item");
-});
+router.delete("/loan/:id", deleteLoan);
 
 export default router;
