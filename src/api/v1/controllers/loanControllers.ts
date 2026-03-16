@@ -21,6 +21,7 @@ export const getAllLoans = (req: Request, res: Response, next: NextFunction): vo
 
 
 export const createLoan = (req: Request, res: Response, next: NextFunction): void => {
+    try {
     const { applicant, amount, status } = req.body;
 
     const newLoan = createLoanService({
@@ -34,9 +35,13 @@ export const createLoan = (req: Request, res: Response, next: NextFunction): voi
         message: "Loan created successfully",
         data: newLoan,
     });
+    } catch (error) {
+        next(error);
+    }
 };
 
-export const updateLoan = (req: Request, res: Response): void => {
+export const updateLoan = (req: Request, res: Response, next: NextFunction): void => {
+    try {
     const loanId = Number(req.params.id);
     const { applicant, amount, status } = req.body;
 
@@ -46,37 +51,30 @@ export const updateLoan = (req: Request, res: Response): void => {
         status,
     });
 
-    if (!updatedLoan) {
-        res.status(404).json({
-            success: false,
-            message: "Loan not found",
-        });
-        return;
-    }
-
-    res.status(200).json({
+    res.status(HTTP_STATUS.OK).json({
         success: true,
         message: "Loan updated successfully",
         data: updatedLoan,
     });
+    } catch (error) {  
+        next(error);
+    }
 };
 
-export const deleteLoan = (req: Request, res: Response): void => {
+export const deleteLoan = (req: Request, res: Response, next: NextFunction): void => {
+
+    try {
     const loanId = Number(req.params.id);
 
     const deletedLoan = deleteLoanService(loanId);
 
-    if (!deletedLoan) {
-        res.status(404).json({
-            success: false,
-            message: "Loan not found",
-        });
-        return;
-    }
-
-    res.status(200).json({
+    res.status(HTTP_STATUS.OK).json({
         success: true,
         message: "Loan deleted successfully",
         data: deletedLoan,
     });
+    
+    } catch (error) {
+        next(error);
+    }
 };
